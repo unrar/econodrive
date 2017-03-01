@@ -9,12 +9,17 @@ class Airbnbs:
       @param dix List[Dictionary]  Should be the data parsed by CsvHandler"""
     self.dix = dix
 
-  def best_couple(self, igs=[]):
+  def best_couple(self, igs=[], fix=0):
     """ Finds the best couple of entries, whose sum of the km column is the lowest """
     sums = []  # Hold sums and ID
     for firste in self.dix:
       kms = firste["km"]
       tid = firste["id"]
+      # If we have fixed one of the IDs, let it be this one
+      if fix:
+        if not tid == fix:
+          continue  # Until we get the entry we want
+          
       # If we are ignoring any IDs, skip this loop
       if tid in igs:
         continue
